@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "xdebug extension",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A modern, dependency-free, extension for Xdebug",
     "author": "fraser.chapman@gmail.com",
     "permissions": [

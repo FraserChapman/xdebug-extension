@@ -1,0 +1,13 @@
+{
+    "name": "xdebug-extension-test",
+    "version": "1.0.0",
+    "dependencies": {
+        "jest": "^29.7.0",
+        "puppeteer-core": "^24.2.0"
+    },
+    "scripts": {
+        "test": "npx jest .",
+        "test-options": "npx jest -t 'Options Tests'",
+        "test-popup": "npx jest -t 'Popup Tests'"
+    }
+}

@@ -20,20 +20,18 @@
                 <option value="XDEBUG_ECLIPSE">Eclipse</option>
                 <option value="netbeans-xdebug">NetBeans</option>
                 <option value="macgdbp">MacGDBp</option>
+                <option value="VSCODE">VSCode</option>
             </datalist>
             <label for="tracetrigger">Trace Trigger</label>
             <input type="text" id="tracetrigger" placeholder="Trace trigger" value="">
             <label for="profiletrigger">Profile Trigger</label>
             <input type="text" id="profiletrigger" placeholder="Profile trigger" value="">
-            <button id="save">Save</button>
+            <button type="reset">Clear</button>
+            <button type="submit">Save</button>
         </fieldset>
     </form>
     <div id="help">
         <h2>Shortcuts</h2>
-        <p><kbd>Alt</kbd> + <kbd>X</kbd> toggle popup</p>
-        <p><kbd>Alt</kbd> + <kbd>C</kbd> toggle debugging</p>
-        <p><kbd>Alt</kbd> + <kbd>V</kbd> toggle profiling</p>
-        <p><kbd>Alt</kbd> + <kbd>V</kbd> toggle profiling</p>
     </div>
     <a href="https://github.com/FraserChapman/xdebug-extension" target="_blank">
         <img src="img/github25.png" alt="GitHub logo" width="25" height="25">

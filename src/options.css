@@ -19,6 +19,12 @@ form {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    transition: background-color .5s linear;
+}
+
+form.success {
+    transition: background-color .5s linear;
+    background-color: rgba(159, 255, 138, 0.5);
 }
 
 fieldset {
@@ -45,15 +51,26 @@ input[type="text"] {
 
 button {
     padding: 10px;
-    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
+button[type="submit"] {
+    background-color: #007bff;
+}
+
+button[type="submit"]:hover {
     background-color: #0056b3;
+}
+
+button[type="reset"] {
+    background-color: #888887;
+}
+
+button[type="reset"]:hover {
+    background-color: #5f5f5f;
 }
 
 input[type="text"]:focus {
@@ -78,6 +95,7 @@ a {
     color: #747474;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 a img {

@@ -4,15 +4,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        if (tab) {
-            const response = await chrome.tabs.sendMessage(tab.id, { cmd: "getStatus" });
-            if (response?.status !== undefined) {
-                const initialStatus = response.status;
-                const radioButton = document.querySelector(`input[name="state"][value="${initialStatus}"]`);
-                if (radioButton) {
-                    radioButton.checked = true;
-                }
-            }
+        if (!tab) {
+            return;
+        }
+
+        const response = await chrome.tabs.sendMessage(tab.id, { cmd: "getStatus" });
+        if (response?.status === undefined) {
+            return
+        }
+
+        const radioButton = document.querySelector(`input[name="state"][value="${response.status}"]`);
+        if (radioButton) {
+            radioButton.checked = true;
         }
     } catch (error) {
         console.log("Error retrieving status:", error);
@@ -24,13 +27,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     radioButtons.forEach(button => {
-        button.addEventListener('change', () => {
+        button.addEventListener('change', e => {
             chrome.runtime.sendMessage({
                 cmd: "setStatus",
-                status: +document.querySelector('input[name="state"]:checked')?.value
-            });
-
-            window.close();
+                status: +e.target.value
+            }).then(() => window.close());
         });
     });
 });

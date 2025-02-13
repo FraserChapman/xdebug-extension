@@ -37,19 +37,19 @@ const updateIcon = (status, tabId) => {
 };
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-    if (changeInfo?.status !== 'complete' || !tab?.url?.startsWith('http')) {
+    if ((changeInfo?.status || tab?.status) !== 'complete') {
         return;
     }
 
     try {
-        const settings = await getSettings();
-        const { xdebugIdeKey, xdebugTraceTrigger, xdebugProfileTrigger } = settings;
+        const { xdebugIdeKey, xdebugTraceTrigger, xdebugProfileTrigger } = await getSettings();
         const response = await chrome.tabs.sendMessage(tabId, {
             cmd: 'getStatus',
             idekey: xdebugIdeKey,
             traceTrigger: xdebugTraceTrigger,
             profileTrigger: xdebugProfileTrigger
         });
+
         updateIcon(response?.status, tabId);
     } catch (error) {
         console.log('Error during tab update:', error);
@@ -128,6 +128,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 
 chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+        chrome.runtime.setUninstallURL('https://forms.gle/XmCBqknF5BZJQhHX6');
         chrome.commands.getAll((commands) => {
             let missingShortcuts = [];
             for (let { name, shortcut } of commands) {
@@ -142,3 +143,4 @@ chrome.runtime.onInstalled.addListener((details) => {
         });
     }
 });
+
